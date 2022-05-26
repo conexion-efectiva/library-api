@@ -1,0 +1,579 @@
+openapi: '3.0.2'
+info:
+  title: Library Api
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+
+paths:
+  /book:
+    get:
+      tags:
+        - books
+      summary: Get a list of books
+      operationId: getBooks
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      tags:
+        - books
+      summary: Creates a new book
+      operationId: postBook
+      requestBody:
+        description: The book to insert
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/BookPost'
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          description: Bad Request
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestError'
+  /book/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+         - books
+      summary: Get a single book
+      operationId: getBook
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Book'
+        404:
+          description: book not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+    put:
+      tags:
+        - books
+      summary: Updates a single book
+      operationId: updateBook
+      requestBody:
+        description: The properties of the book to update
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/BookPost'
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Book'
+        400:
+          description: Bad Request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+    delete:
+      tags:
+        - books
+      summary: Deletes a book
+      operationId: deleteBook
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Book'
+        404:
+          description: book not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+  /author:
+    get:
+      tags:
+        - authors
+      summary: List the authors
+      operationId: getAuthors
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    post:
+      tags:
+        - authors
+      summary: Creates a new author
+      operationId: createAuthor
+      requestBody:
+        description: The author to create
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/AuthorPost'
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Author'
+        400:
+          description: Bad Request
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestError'
+  /author/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+       - authors
+      summary: Gets a single author
+      operationId: getAuthor
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Author'
+        404:
+          description: Author not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+    put:
+      tags:
+        - authors
+      summary: Updates a single author
+      operationId: updateAuthor
+      requestBody:
+        description: The properties of the author to update
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/AuthorPost'
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Author'
+        400:
+          description: Bad Request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+    delete:
+      tags:
+        - authors
+      summary: Deletes a author
+      operationId: deleteAuthor
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Author'
+        404:
+          description: author not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+  /lending:
+    get:
+      tags:
+        - lendings
+      summary: List the lendings
+      operationId: getLendings
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lending'
+    post:
+      tags:
+        - lendings
+      summary: Creates a new lending
+      operationId: createLending
+      requestBody:
+        description: The lending to create
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/LendingPost'
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Lending'
+        400:
+          description: Bad Request
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestError'
+  /lending/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+       - lendings
+      summary: Gets a single lending
+      operationId: getLending
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Lending'
+        404:
+          description: Lending not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+    put:
+      tags:
+        - lendings
+      summary: Updates a single lending
+      operationId: updateLending
+      requestBody:
+        description: The properties of the lending to update
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/LendingPost'
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Lending'
+        400:
+          description: Bad Request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+    delete:
+      tags:
+        - lendings
+      summary: Deletes a lending
+      operationId: deleteLending
+      responses:
+        200:
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Lending'
+        404:
+          description: author not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+  /signup:
+    post:
+      tags:
+      - user
+      summary: Create user
+      description: User get created
+      operationId: createUser
+      requestBody:
+        description: User to create
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserPost'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: invalid input data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+  /login:
+    post:
+      tags:
+      - user
+      summary: Logs in an user
+      description: Logs in user
+      operationId: loginUser
+      requestBody:
+        description: Access Token
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserToken'
+        400:
+          description: invalid input data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RequestError'
+
+components:
+  schemas:
+    Author:
+      type: object
+      required:
+        - authorId
+        - name
+        - country
+      properties:
+        authorId:
+          type: integer
+          example: 4
+        name:
+          type: string
+          example: John Katzebatch
+        country:
+          type: string
+          example: Canada
+    AuthorPost:
+      type: object
+      required:
+        - name
+        - country
+      properties:
+        name:
+          type: string
+          example: John Katzebatch
+        country:
+          type: string
+          example: Canada 
+    Book:
+      type: object
+      required:
+        - bookId
+        - title
+        - author
+        - genre
+        - language
+      properties:
+        bookId:
+          type: integer
+          example: 2
+        title:
+          type: string
+          example: El psicoanalista
+        genre:
+          type: string
+          example: Ficción
+        language:
+          type: string
+          example: Español
+        author:
+          type: object
+          required:
+            - authorId
+            - name
+          properties:
+            authorId:
+              type: integer
+              example: 4
+            name:
+              type: string
+              example: John Katzebatch
+    BookPost:
+      type: object
+      required:
+        - title
+        - genre
+        - language
+        - author
+      properties:
+        title:
+          type: string
+          example: El psicoanalista
+        genre:
+          type: string
+          example: Ficción
+        language:
+          type: string
+          example: Español
+        author:
+          type: object
+          required:
+            - authorId
+          properties:
+            authorId:
+              type: integer
+              example: 4
+    Lending:
+      type: object
+      required:
+        - lendingId
+        - book
+      properties:
+        lendingId:
+          type: integer
+          example: 2
+        startDate:
+          type: string
+          format: date-time
+          example: '2022-05-16T12:16:50.212Z'
+        endDate:
+          type: string
+          format: date
+          example: '2022-05-16T12:16:50.212Z'
+        book:
+          type: object
+          required:
+            - bookId
+            - title
+            - authorName
+          properties:
+            bookId:
+              type: integer
+              example: 2
+            title:
+              type: string
+            authorName:
+              type: string
+    LendingPost:
+      type: object
+      required:
+        - book
+      properties:
+         book:
+          type: object
+          required:
+            - bookId
+            - startDate
+          properties:
+            bookId:
+              type: integer
+              example: 2
+    UserPost:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Rodrigo Saez'
+        email:
+          type: string
+          example: 'rodrigo@gmail.com'
+        password:
+          type: string
+          example: 'asjdiajdiasj'
+      xml:
+        name: User
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          example: 'rodrigo@gmail.com'
+        password:
+          type: string
+          example: 'asjdiajdiasj'
+      xml:
+        name: User
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12
+        name:
+          type: string
+          example: 'Rodrigo Saez'
+        email:
+          type: string
+          example: 'rodrigo@gmail.com'
+        password:
+          type: string
+          example: 'asjdiajdiasj'
+      xml:
+        name: User
+    UserToken:
+      type: object
+      properties:
+        token:
+          type: string
+          example: 'eaahsusahudahsudhajdsiajdsi'
+    RequestError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'NOT_FOUND'
+        severity:
+          example: 'HIGH'
+          type: string
