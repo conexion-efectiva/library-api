@@ -1,0 +1,33 @@
+{
+  "name": "library-api",
+  "version": "1.0.0",
+  "description": "API para una biblioteca, hecho con nodejs ==========================================",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conexion-efectiva/library-api.git"
+  },
+  "author": "Rodrigo Saez <rodrigosaez93@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conexion-efectiva/library-api/issues"
+  },
+  "homepage": "https://github.com/conexion-efectiva/library-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.2",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  }
+}
